@@ -1,6 +1,5 @@
 package com.example.pomdesignpattern.base;
 
-import com.example.pomdesignpattern.pages.CommentPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

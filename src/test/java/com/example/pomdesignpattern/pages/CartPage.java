@@ -6,7 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 import java.util.List;
 
 public class CartPage extends BasePage{
@@ -23,8 +27,8 @@ public class CartPage extends BasePage{
     WebElement selectedProductPrice;
     @FindBy(css= ".price hepsiburada price-new-old")
     WebElement selectedProductPrice1;
-    @FindBy(xpath= "//button[@class='button big with-icon' and @id='addToCart']")
-    WebElement addTocart;
+    //@FindBy(xpath= "//span[@class='addToCartButton']")
+    //WebElement addTocart;
     @FindBy(xpath = "//button[contains(text(),'Sepete git')]")
     WebElement goTocart;
     @FindBy(xpath = "//div[@class='price_1D8UZ']")
@@ -52,6 +56,14 @@ public class CartPage extends BasePage{
         System.out.println("selectedProductPrice = " + selectedProductPrice);
         return selectedProductPrice;
     }
+
+    public double getSelectedProductPrice2() {
+        // Seçilen ürün fiyatını al
+        WebElement  selectedProductPriceElement = driver.findElement(By.xpath("//button[@data-price]"));
+        String selectedProductPriceText = selectedProductPriceElement.getText();
+        double selectedProductPrice = Double.parseDouble(selectedProductPriceText.replaceAll("[^0-9,]", "").replace(",", "."));
+        return selectedProductPrice;
+    }
     public double getCartPrice() {
         // Sepet fiyat kontrolü
         WebElement cartPriceElement = driver.findElement(By.xpath(String.valueOf(cartPrice)));
@@ -60,13 +72,30 @@ public class CartPage extends BasePage{
         return cartPrice;
     }
     public CartPage addToCartTheProduct() throws InterruptedException {
-        clickAnElement(addTocart);
-        Thread.sleep(5000);
-        System.out.println("Ürün sepete eklendi ");
+        List<WebElement> addToCartTheProduct = driver.findElements(By.xpath("//button[@class='button big with-icon']"));
+        boolean buttonIsVisible = !addToCartTheProduct.isEmpty();
+        if (buttonIsVisible) {
+            // Sepete ekle butonlarından ilkine tıkla
+            addToCartTheProduct.get(0).click();
+            // Ürünü sepete ekl
+            Thread.sleep(5000);
+            System.out.println("Ürün sepete eklendi ");
+        }
         return this;
     }
+    public CartPage addToCartTheProduct1() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(300));
+        WebElement addToCartTheProduct = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='addToCartButton']")));
+        addToCartTheProduct.click();
+            // Ürünü sepete ekle
+            Thread.sleep(5000);
+            System.out.println("Ürün sepete eklendi ");
+        return this;
+        }
+
     public CartPage goToCart() throws InterruptedException {
-        basePage.clickAnElement(goTocart);
+        Thread.sleep(5000);
+        clickAnElement(goTocart);
         Thread.sleep(5000);
         System.out.println("Sepete gidildi ");
         return this;

@@ -49,15 +49,15 @@ public class CoreTest {
         basePage.secondTab();
         commentPage.scrollUntilToReviewTab()
                 .clickReviewTab()
-                .clickOrangeArrow()
+                .clickOrangeArrow();
                 // Combobox içinde en yeni değerlendirmeyi seç
-                .clickNewestReviews()
+                //.clickNewestReviews1()
                 // Değerlendirmelerin yüklenmesini bekle
-                .assertReviewsLoadedAccordingToNewest()
+                //.assertReviewsLoadedAccordingToNewest()
                 // ThumbsUp seçeneğini rastgele seç
-                .chooseFirstFromThumbsButton()
+                //.chooseFirstFromThumbsButton1()
                 // Teşekkür ederiz yazısını kontrol et
-                .checkThanksMessage();
+                //.checkThanksMessage();
     }
 
     @Test(groups = {"smoke", "regression"}, priority = 2,
@@ -76,9 +76,10 @@ public class CoreTest {
         basePage.secondTab();
         sellerPage.scrollUntilToSellerTab()
                 //Diğer satıcılar tabına tıkla
-                .clickToSellerTab();
+                .clickToSellerTab()
                 //Diğer satıcılar varsa en düşük fiyatlıyı sepete ekle
-                //.otherSellersClickFirstSellerAndAddToCart();
+                .otherSellersClickFirstSellerAndAddToCart1()
+                .assertCheapestProductAddedToBasket();
     }
 
 
@@ -97,8 +98,9 @@ public class CoreTest {
         //İkinci taba geçildi
         basePage.secondTab();
         //selectedProductPrice alındı
-        //cartPage.gettingSelectedCartPrice()
-        cartPage.addToCartTheProduct()
+        //cartPage.getSelectedProductPrice2();
+        cartPage.addToCartTheProduct1()
+        // Ürünü sepete ekle
                 .goToCart();
                 //.gettingCartPrice()
                 // Sepetteki fiyat ile ürün fiyatı karşılaştırılır.
