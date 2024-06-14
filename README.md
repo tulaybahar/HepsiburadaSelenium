@@ -1,12 +1,16 @@
 # HepsiburadaSelenium
 
 **Description**
+
+
 This project is a test automation suite for the Hepsiburada website. It uses Selenium WebDriver for browser automation, Java as the programming language,an d IntelliJ for code editor and TestNG as the testing framework. The project is structured based on the Page Object Model (POM) design pattern to enhance code readability and maintainability.
 Under test/.../pomdesignpattern you will find my code files.
 
 
 
 **Project Structure:**
+
+
 **base:** Contains base classes and utilities used across the project.
 BasePage.java: The base class for all page objects, providing common methods and properties.
 BaseTest.java: The base class for all test classes, handling setup and teardown processes.
