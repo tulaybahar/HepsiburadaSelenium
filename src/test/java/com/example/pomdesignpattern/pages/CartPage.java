@@ -2,6 +2,7 @@ package com.example.pomdesignpattern.pages;
 
 import com.example.pomdesignpattern.base.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
 import java.util.List;
@@ -29,6 +31,8 @@ public class CartPage extends BasePage{
     WebElement selectedProductPrice1;
     //@FindBy(xpath= "//span[@class='addToCartButton']")
     //WebElement addTocart;
+    @FindBy(xpath= "//button[@class='button big with-icon']")
+    WebElement addTocart1;
     @FindBy(xpath = "//button[contains(text(),'Sepete git')]")
     WebElement goTocart;
     @FindBy(xpath = "//div[@class='price_1D8UZ']")
@@ -84,14 +88,15 @@ public class CartPage extends BasePage{
         return this;
     }
     public CartPage addToCartTheProduct1() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(300));
-        WebElement addToCartTheProduct = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='addToCartButton']")));
-        addToCartTheProduct.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(500));
+        WebElement addToCartTheProduct = wait.until(ExpectedConditions.elementToBeClickable(addTocart1));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", addTocart1);addToCartTheProduct.click();
             // Ürünü sepete ekle
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             System.out.println("Ürün sepete eklendi ");
         return this;
         }
+
 
     public CartPage goToCart() throws InterruptedException {
         Thread.sleep(5000);

@@ -76,7 +76,7 @@ public class ProductSearchPage extends BasePage {
     public ProductSearchPage assertKeywordIsSearched() throws InterruptedException {
         Assert.assertNotNull(productList, "Ürün listesi görüldü");
         System.out.println("ürün listesi görüldü ");
-        Thread.sleep(1000);
+        Thread.sleep(10000);
         return this;
     }
     public ProductSearchPage assertProductDetailLoaded (){
